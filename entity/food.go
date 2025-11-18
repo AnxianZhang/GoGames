@@ -1,9 +1,11 @@
 package entity
 
 import (
-	"github.com/AnxianZhang/GoGames/common"
-	"github.com/AnxianZhang/GoGames/math"
 	"image/color"
+
+	"github.com/AnxianZhang/GoGames/common"
+	"github.com/AnxianZhang/GoGames/common/gameStatus"
+	"github.com/AnxianZhang/GoGames/math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -24,8 +26,8 @@ func (f Food) GetPosition() math.Position {
 	return f.position
 }
 
-func (f Food) Update(environment WorldView) bool {
-	return false
+func (f Food) Update(environment WorldView) gameStatus.GameStatus {
+	return gameStatus.CONTINUE
 }
 
 func (f Food) Draw(screen *ebiten.Image) {

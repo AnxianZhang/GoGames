@@ -1,9 +1,11 @@
 package entity
 
 import (
-	"github.com/AnxianZhang/GoGames/common"
-	"github.com/AnxianZhang/GoGames/math"
 	"image/color"
+
+	"github.com/AnxianZhang/GoGames/common"
+	"github.com/AnxianZhang/GoGames/common/gameStatus"
+	"github.com/AnxianZhang/GoGames/math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -21,14 +23,14 @@ func NewSnake(start, direction math.Position) *Snake {
 	return &Snake{[]math.Position{start}, direction}
 }
 
-func (s *Snake) Update(environment WorldView) bool {
+func (s *Snake) Update(environment WorldView) gameStatus.GameStatus {
 	// update stake state
 	head := s.getHead()
 	newHeadPosition := head.Add(s.direction)
 
 	// if it is the case, lose the game
 	if head.IsInCollisionWithScreen(s.body[1:]) {
-		return true
+		return gameStatus.LOSE
 	}
 
 	var needToGrow = false
@@ -48,7 +50,7 @@ func (s *Snake) Update(environment WorldView) bool {
 		s.body = append([]math.Position{newHeadPosition}, s.body[:len(s.body)-1]...)
 	}
 
-	return false
+	return gameStatus.CONTINUE
 }
 
 func (s Snake) Draw(screen *ebiten.Image) {

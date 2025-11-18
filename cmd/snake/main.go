@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/AnxianZhang/GoGames/common"
+	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity"
 	"github.com/AnxianZhang/GoGames/game"
 	"github.com/AnxianZhang/GoGames/math"
@@ -20,6 +21,8 @@ import (
 var (
 	fontSource *text.GoTextFaceSource
 )
+
+var _ ebiten.Game = (*SnakeGame)(nil)
 
 type SnakeGame struct {
 	environment game.Environment
@@ -71,7 +74,8 @@ func (sg *SnakeGame) Update() error {
 	sg.lastUpdate = time.Now()
 
 	for _, e := range sg.environment.GetEntites() {
-		if e.Update(sg.environment) {
+		var status gameStatus.GameStatus = e.Update(sg.environment)
+		if status == gameStatus.LOSE {
 			sg.isGameOver = true
 			return nil
 		}

@@ -1,8 +1,9 @@
 package math
 
 import (
-	"github.com/AnxianZhang/GoGames/common"
 	"math/rand"
+
+	"github.com/AnxianZhang/GoGames/common"
 )
 
 var (
@@ -38,6 +39,30 @@ func (p Position) GetY() int {
 	return p.y
 }
 
+func (p *Position) MoveRight(_x int) {
+	p.x += _x
+}
+
+func (p *Position) MoveDown(_y int) {
+	p.y += _y
+}
+
+func (p *Position) MoveLeft(_x int) {
+	p.x -= _x
+}
+
+func (p *Position) MoveUp(_y int) {
+	p.y -= _y
+}
+
+func (p *Position) setX(_x int) {
+	p.x = _x
+}
+
+func (p *Position) setY(_y int) {
+	p.y = _y
+}
+
 func (p Position) IsEqualTo(other Position) bool {
 	return p.x == other.GetX() && p.y == other.GetY()
 }
@@ -57,7 +82,7 @@ func (p *Position) IsInCollisionWithScreen(entityPosition []Position) bool {
 
 	// check if it is a self collision
 	for _, e := range entityPosition {
-		if p.x == e.GetX() && p.y == e.y {
+		if p.x == e.x && p.y == e.y {
 			return true
 		}
 	}
