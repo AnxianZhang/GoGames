@@ -1,4 +1,4 @@
-package entity
+package generic
 
 import (
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
@@ -13,6 +13,7 @@ type Entity interface {
 	Draw(screen *ebiten.Image)
 
 	// Tag is used to identify the identity type
+	// It must start with an uppercase character
 	Tag() string
 }
 
@@ -30,10 +31,10 @@ func NewObject(_x, _y, _w, _h int) *Object {
 	}
 }
 
-func (o Object) getWidth() int {
+func (o Object) GetWidth() int {
 	return o.width
 }
 
-func (o Object) getHeight() int {
+func (o Object) GetHeight() int {
 	return o.height
 }

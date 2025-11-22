@@ -1,19 +1,21 @@
 package game
 
-import "github.com/AnxianZhang/GoGames/entity"
+import (
+	"github.com/AnxianZhang/GoGames/entity/generic"
+)
 
-var _ entity.WorldView = Environment{}
+var _ generic.WorldView = Environment{}
 
 type Environment struct {
-	entities []entity.Entity
+	entities []generic.Entity
 }
 
 func NewEnvironment() *Environment {
-	return &Environment{[]entity.Entity{}}
+	return &Environment{[]generic.Entity{}}
 }
 
-func (env Environment) SearchEntities(tag string) []entity.Entity {
-	var result = make([]entity.Entity, 0, len(env.entities))
+func (env Environment) SearchEntities(tag string) []generic.Entity {
+	var result = make([]generic.Entity, 0, len(env.entities))
 
 	for _, e := range env.entities {
 		if e.Tag() == tag {
@@ -24,11 +26,11 @@ func (env Environment) SearchEntities(tag string) []entity.Entity {
 	return result
 }
 
-func (env Environment) GetEntites() []entity.Entity {
+func (env Environment) GetEntites() []generic.Entity {
 	return env.entities
 }
 
-func (env Environment) FindFirstEntity(tag string) (entity.Entity, bool) {
+func (env Environment) FindFirstEntity(tag string) (generic.Entity, bool) {
 	for _, e := range env.entities {
 		if e.Tag() == tag {
 			return e, true
@@ -38,7 +40,7 @@ func (env Environment) FindFirstEntity(tag string) (entity.Entity, bool) {
 	return nil, false
 }
 
-func (env *Environment) AddEntity(other entity.Entity) *Environment {
+func (env *Environment) AddEntity(other generic.Entity) *Environment {
 	env.entities = append(env.entities, other)
 	return env
 }

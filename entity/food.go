@@ -5,6 +5,7 @@ import (
 
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
+	"github.com/AnxianZhang/GoGames/entity/generic"
 	"github.com/AnxianZhang/GoGames/math"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -12,7 +13,7 @@ import (
 )
 
 // explicitly tell go that Food should implement Entity
-var _ Entity = (*Food)(nil)
+var _ generic.Entity = (*Food)(nil)
 
 type Food struct {
 	position math.Position
@@ -26,7 +27,7 @@ func (f Food) GetPosition() math.Position {
 	return f.position
 }
 
-func (f Food) Update(environment WorldView) gameStatus.GameStatus {
+func (f Food) Update(environment generic.WorldView) gameStatus.GameStatus {
 	return gameStatus.CONTINUE
 }
 

@@ -5,6 +5,7 @@ import (
 
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
+	"github.com/AnxianZhang/GoGames/entity/generic"
 	"github.com/AnxianZhang/GoGames/math"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -12,7 +13,7 @@ import (
 )
 
 // this syntax is a convention in ebiten, implicitly tel go that Snake should implement Entity interface
-var _ Entity = (*Snake)(nil)
+var _ generic.Entity = (*Snake)(nil)
 
 type Snake struct {
 	body      []math.Position
@@ -23,7 +24,7 @@ func NewSnake(start, direction math.Position) *Snake {
 	return &Snake{[]math.Position{start}, direction}
 }
 
-func (s *Snake) Update(environment WorldView) gameStatus.GameStatus {
+func (s *Snake) Update(environment generic.WorldView) gameStatus.GameStatus {
 	// update stake state
 	head := s.getHead()
 	newHeadPosition := head.Add(s.direction)
@@ -38,7 +39,7 @@ func (s *Snake) Update(environment WorldView) gameStatus.GameStatus {
 	for _, foodEntity := range environment.SearchEntities("food") {
 		food := foodEntity.(*Food)
 
-		if head.IsEqualTo(food.GetPosition()) {
+		if head.IsSamePosition(food.GetPosition()) {
 			needToGrow = true
 			food.Respwan()
 		}

@@ -6,4 +6,6 @@ package common
 const (
 	BALL_SPEED   = 3
 	PADDLE_SPEED = 6 // = move 6 pixels per tick
+
+	PLAYER_SPEED = 2
 )

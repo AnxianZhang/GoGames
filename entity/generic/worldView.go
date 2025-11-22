@@ -1,4 +1,4 @@
-package entity
+package generic
 
 type WorldView interface {
 	SearchEntities(tag string) []Entity

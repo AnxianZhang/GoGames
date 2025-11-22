@@ -63,7 +63,7 @@ func (p *Position) setY(_y int) {
 	p.y = _y
 }
 
-func (p Position) IsEqualTo(other Position) bool {
+func (p Position) IsSamePosition(other Position) bool {
 	return p.x == other.GetX() && p.y == other.GetY()
 }
 

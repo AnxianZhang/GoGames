@@ -5,25 +5,26 @@ import (
 
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
+	"github.com/AnxianZhang/GoGames/entity/generic"
 	"github.com/AnxianZhang/GoGames/math"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
-var _ Entity = (*Ball)(nil)
+var _ generic.Entity = (*Ball)(nil)
 
 type Ball struct {
-	Object
+	generic.Object
 	velocity *math.Velocity // per tick
 }
 
 func NewBall(x, y, xVelocity, yVelocity, width, height int) *Ball {
-	return &Ball{*NewObject(x, y, width, height),
+	return &Ball{*generic.NewObject(x, y, width, height),
 		math.NewVelocity(xVelocity, yVelocity),
 	}
 }
 
-func (b *Ball) Update(environment WorldView) gameStatus.GameStatus {
+func (b *Ball) Update(environment generic.WorldView) gameStatus.GameStatus {
 	switch {
 	case b.Object.GetX() >= common.SCREEN_WIDTH:
 		b.ResetPosition()
@@ -43,7 +44,7 @@ func (b *Ball) Update(environment WorldView) gameStatus.GameStatus {
 	paddle := rawPaddle.(*Paddle)
 
 	if b.Object.GetX() >= paddle.GetX() &&
-		b.Object.GetY() >= paddle.GetY() && b.Object.GetY() <= paddle.GetY()+paddle.getHeight() {
+		b.Object.GetY() >= paddle.GetY() && b.Object.GetY() <= paddle.GetY()+paddle.GetHeight() {
 		b.velocity.SetX(-common.BALL_SPEED)
 		return gameStatus.GET_POINT
 	}
@@ -54,7 +55,7 @@ func (b *Ball) Update(environment WorldView) gameStatus.GameStatus {
 func (b Ball) Draw(screen *ebiten.Image) {
 	vector.FillRect(screen,
 		float32(b.GetX()), float32(b.GetY()),
-		float32(b.getWidth()), float32(b.getHeight()),
+		float32(b.GetWidth()), float32(b.GetHeight()),
 		color.White, true,
 	)
 }
