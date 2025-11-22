@@ -3,7 +3,7 @@ package math
 import "math/rand/v2"
 
 type Velocity struct {
-	direction Position
+	direction *Position
 }
 
 func NewVelocity(x, y int) *Velocity {

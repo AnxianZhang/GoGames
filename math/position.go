@@ -18,16 +18,16 @@ type Position struct {
 	x, y int
 }
 
-func NewPositionWithOffSet(_x int, _y int, xOffset int, yOffset int) Position {
+func NewPositionWithOffSet(_x int, _y int, xOffset int, yOffset int) *Position {
 	// Offsets will be added / removed the total grid boxes
-	return Position{_x/common.GRID_SIZE/2 + xOffset, _y/common.GRID_SIZE/2 + yOffset}
+	return &Position{_x/common.GRID_SIZE/2 + xOffset, _y/common.GRID_SIZE/2 + yOffset}
 }
 
-func NewGridPosition(_x int, _y int) Position {
-	return Position{_x, _y}
+func NewGridPosition(_x int, _y int) *Position {
+	return &Position{_x, _y}
 }
 
-func RandomPosition() Position {
+func RandomPosition() *Position {
 	return NewGridPosition(rand.Intn(common.X_CASE), rand.Intn(common.Y_CASE))
 }
 
@@ -63,18 +63,18 @@ func (p *Position) setY(_y int) {
 	p.y = _y
 }
 
-func (p Position) IsSamePosition(other Position) bool {
+func (p Position) IsSamePosition(other *Position) bool {
 	return p.x == other.GetX() && p.y == other.GetY()
 }
 
-func (p *Position) Add(other Position) Position {
+func (p *Position) Add(other *Position) *Position {
 	p.x += other.x
 	p.y += other.y
 
-	return *p
+	return p
 }
 
-func (p *Position) IsInCollisionWithScreen(entityPosition []Position) bool {
+func (p *Position) IsInCollisionWithScreen(entityPosition []*Position) bool {
 	// is in collision with the borders
 	if p.y < 0 || p.y >= common.Y_CASE || p.x < 0 || p.x >= common.X_CASE {
 		return true

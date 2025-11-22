@@ -19,7 +19,7 @@ type Entity interface {
 
 // Object is alongside with the entity, both need to be implemented / inherited
 type Object struct {
-	math.Position
+	*math.Position
 	width  int
 	height int
 }

@@ -16,14 +16,14 @@ import (
 var _ generic.Entity = (*Food)(nil)
 
 type Food struct {
-	position math.Position
+	position *math.Position
 }
 
 func NewFood() *Food {
 	return &Food{math.RandomPosition()}
 }
 
-func (f Food) GetPosition() math.Position {
+func (f Food) GetPosition() *math.Position {
 	return f.position
 }
 
