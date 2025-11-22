@@ -14,10 +14,11 @@ var _ generic.Entity = (*Enemy)(nil)
 type Enemy struct {
 	*generic.Sprite
 	canAttack bool
+	camera    *Camera
 }
 
-func NewEnemy(x, y int, img *ebiten.Image, canAttack bool) *Enemy {
-	return &Enemy{generic.NewSprite(img, x, y), canAttack}
+func NewEnemy(x, y int, img *ebiten.Image, canAttack bool, camera *Camera) *Enemy {
+	return &Enemy{generic.NewSprite(img, x, y), canAttack, camera}
 }
 
 func (e *Enemy) Update(environment generic.WorldView) gameStatus.GameStatus {
@@ -49,6 +50,7 @@ func (e *Enemy) Update(environment generic.WorldView) gameStatus.GameStatus {
 func (e *Enemy) Draw(screen *ebiten.Image) {
 	options := ebiten.DrawImageOptions{}
 	options.GeoM.Translate(float64(e.GetX()), float64(e.GetY()))
+	options.GeoM.Translate(float64(e.camera.GetX()), float64(e.camera.GetY()))
 
 	screen.DrawImage(e.GetImage().SubImage(
 		// 16 and 16 is the dimension of one tiles

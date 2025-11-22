@@ -13,10 +13,11 @@ var _ generic.Entity = (*Potion)(nil)
 type Potion struct {
 	*generic.Sprite
 	healAmount uint8
+	camera     *Camera
 }
 
-func NewPotion(x, y int, healAmount uint8, img *ebiten.Image) *Potion {
-	return &Potion{generic.NewSprite(img, x, y), healAmount}
+func NewPotion(x, y int, healAmount uint8, img *ebiten.Image, camera *Camera) *Potion {
+	return &Potion{generic.NewSprite(img, x, y), healAmount, camera}
 }
 
 func (p *Potion) Update(environment generic.WorldView) gameStatus.GameStatus {
@@ -38,6 +39,7 @@ func (p *Potion) Update(environment generic.WorldView) gameStatus.GameStatus {
 func (p *Potion) Draw(screen *ebiten.Image) {
 	options := ebiten.DrawImageOptions{}
 	options.GeoM.Translate(float64(p.GetX()), float64(p.GetY()))
+	options.GeoM.Translate(float64(p.camera.GetX()), float64(p.camera.GetY()))
 
 	screen.DrawImage(p.GetImage(), &options)
 }

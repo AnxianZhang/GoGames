@@ -11,7 +11,7 @@ import (
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity"
 	"github.com/AnxianZhang/GoGames/game"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
@@ -54,17 +54,17 @@ func (sg *SnakeGame) Update() error {
 
 	switch {
 	case ebiten.IsKeyPressed(ebiten.KeyW):
-		snake.SetDirection(math.UpDirection)
+		snake.SetDirection(geometry.UpDirection)
 	case ebiten.IsKeyPressed(ebiten.KeyS):
-		snake.SetDirection(math.DownDirection)
+		snake.SetDirection(geometry.DownDirection)
 	case ebiten.IsKeyPressed(ebiten.KeyA):
-		snake.SetDirection(math.LeftDirection)
+		snake.SetDirection(geometry.LeftDirection)
 	case ebiten.IsKeyPressed(ebiten.KeyD):
-		snake.SetDirection(math.RightDirection)
+		snake.SetDirection(geometry.RightDirection)
 		//case ebiten.IsKeyPressed(ebiten.KeyR):
 		//	sg.isGameOver = false
-		//	 = []math.Position{math.NewPositionWithOffSet(common.SCREEN_WIDTH, common.SCREEN_HEIGHT, 0, 0)}
-		//	snake.SetDirection(math.NewGridPosition(0, 0)
+		//	 = []geometry.Position{geometry.NewPositionWithOffSet(common.SCREEN_WIDTH, common.SCREEN_HEIGHT, 0, 0)}
+		//	snake.SetDirection(geometry.NewGridPosition(0, 0)
 	}
 	if time.Since(sg.lastUpdate) < common.GAME_SPEED {
 		return nil
@@ -135,8 +135,8 @@ func initialiseGame() *SnakeGame {
 	environment := game.NewEnvironment()
 	environment.AddEntity(
 		entity.NewSnake(
-			math.NewPositionWithOffSet(common.SCREEN_WIDTH, common.SCREEN_HEIGHT, 0, 0),
-			math.NoDirection,
+			geometry.NewPositionWithOffSet(common.SCREEN_WIDTH, common.SCREEN_HEIGHT, 0, 0),
+			geometry.NoDirection,
 		),
 	)
 

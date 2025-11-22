@@ -6,7 +6,7 @@ import (
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity/generic"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -16,12 +16,12 @@ import (
 var _ generic.Entity = (*Snake)(nil)
 
 type Snake struct {
-	body      []*math.Position
-	direction *math.Position // can have an x and y acceleration, the snake will move along this direction
+	body      []*geometry.Position
+	direction *geometry.Position // can have an x and y acceleration, the snake will move along this direction
 }
 
-func NewSnake(start, direction *math.Position) *Snake {
-	return &Snake{[]*math.Position{start}, direction}
+func NewSnake(start, direction *geometry.Position) *Snake {
+	return &Snake{[]*geometry.Position{start}, direction}
 }
 
 func (s *Snake) Update(environment generic.WorldView) gameStatus.GameStatus {
@@ -46,9 +46,9 @@ func (s *Snake) Update(environment generic.WorldView) gameStatus.GameStatus {
 	}
 
 	if needToGrow {
-		s.body = append([]*math.Position{newHeadPosition}, s.body[:len(s.body)]...)
+		s.body = append([]*geometry.Position{newHeadPosition}, s.body[:len(s.body)]...)
 	} else {
-		s.body = append([]*math.Position{newHeadPosition}, s.body[:len(s.body)-1]...)
+		s.body = append([]*geometry.Position{newHeadPosition}, s.body[:len(s.body)-1]...)
 	}
 
 	return gameStatus.CONTINUE
@@ -82,10 +82,10 @@ func (s Snake) Tag() string {
 	return "Snake"
 }
 
-func (s *Snake) SetDirection(newDirection *math.Position) {
+func (s *Snake) SetDirection(newDirection *geometry.Position) {
 	s.direction = newDirection
 }
 
-func (s Snake) getHead() *math.Position {
+func (s Snake) getHead() *geometry.Position {
 	return s.body[0]
 }

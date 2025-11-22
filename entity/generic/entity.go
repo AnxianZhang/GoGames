@@ -2,7 +2,7 @@ package generic
 
 import (
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -19,14 +19,14 @@ type Entity interface {
 
 // Object is alongside with the entity, both need to be implemented / inherited
 type Object struct {
-	*math.Position
+	*geometry.Position
 	width  int
 	height int
 }
 
 func NewObject(_x, _y, _w, _h int) *Object {
 	return &Object{
-		math.NewGridPosition(_x, _y),
+		geometry.NewGridPosition(_x, _y),
 		_w, _h,
 	}
 }

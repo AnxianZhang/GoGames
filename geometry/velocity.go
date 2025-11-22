@@ -1,4 +1,4 @@
-package math
+package geometry
 
 import "math/rand/v2"
 
@@ -28,9 +28,9 @@ func (v Velocity) GetY() int {
 }
 
 func (v *Velocity) SetX(_x int) {
-	v.direction.setX(_x)
+	v.direction.SetX(_x)
 }
 
 func (v *Velocity) SetY(_y int) {
-	v.direction.setY(_y)
+	v.direction.SetY(_y)
 }

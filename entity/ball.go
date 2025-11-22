@@ -6,7 +6,7 @@ import (
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity/generic"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
@@ -15,12 +15,12 @@ var _ generic.Entity = (*Ball)(nil)
 
 type Ball struct {
 	generic.Object
-	velocity *math.Velocity // per tick
+	velocity *geometry.Velocity // per tick
 }
 
 func NewBall(x, y, xVelocity, yVelocity, width, height int) *Ball {
 	return &Ball{*generic.NewObject(x, y, width, height),
-		math.NewVelocity(xVelocity, yVelocity),
+		geometry.NewVelocity(xVelocity, yVelocity),
 	}
 }
 
@@ -65,5 +65,5 @@ func (b Ball) Tag() string {
 }
 
 func (b *Ball) ResetPosition() {
-	b.Object.Position = math.NewGridPosition(0, 0)
+	b.Object.Position = geometry.NewGridPosition(0, 0)
 }

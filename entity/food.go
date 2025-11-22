@@ -6,7 +6,7 @@ import (
 	"github.com/AnxianZhang/GoGames/common"
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity/generic"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -16,14 +16,14 @@ import (
 var _ generic.Entity = (*Food)(nil)
 
 type Food struct {
-	position *math.Position
+	position *geometry.Position
 }
 
 func NewFood() *Food {
-	return &Food{math.RandomPosition()}
+	return &Food{geometry.RandomPosition()}
 }
 
-func (f Food) GetPosition() *math.Position {
+func (f Food) GetPosition() *geometry.Position {
 	return f.position
 }
 
@@ -48,5 +48,5 @@ func (f Food) Tag() string {
 }
 
 func (f *Food) Respwan() {
-	f.position = math.RandomPosition()
+	f.position = geometry.RandomPosition()
 }

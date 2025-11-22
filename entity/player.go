@@ -15,10 +15,11 @@ var _ generic.Entity = (*Player)(nil)
 type Player struct {
 	*generic.Sprite
 	health uint8
+	camera *Camera
 }
 
-func NewPlayer(x, y int, img *ebiten.Image, health uint8) *Player {
-	return &Player{generic.NewSprite(img, x, y), health}
+func NewPlayer(x, y int, img *ebiten.Image, health uint8, camera *Camera) *Player {
+	return &Player{generic.NewSprite(img, x, y), health, camera}
 }
 
 func (p *Player) Update(environment generic.WorldView) gameStatus.GameStatus {
@@ -30,6 +31,7 @@ func (p *Player) Draw(screen *ebiten.Image) {
 
 	options := ebiten.DrawImageOptions{}
 	options.GeoM.Translate(float64(p.GetX()), float64(p.GetY()))
+	options.GeoM.Translate(float64(p.camera.GetX()), float64(p.camera.GetY()))
 
 	screen.DrawImage(p.GetImage().SubImage(
 		image.Rect(0, 0, 16, 16),

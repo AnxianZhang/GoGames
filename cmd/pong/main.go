@@ -12,7 +12,7 @@ import (
 	"github.com/AnxianZhang/GoGames/common/gameStatus"
 	"github.com/AnxianZhang/GoGames/entity"
 	"github.com/AnxianZhang/GoGames/game"
-	"github.com/AnxianZhang/GoGames/math"
+	"github.com/AnxianZhang/GoGames/geometry"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
@@ -116,7 +116,7 @@ func initialisePongGame() *PongGame {
 	for range 50 {
 		pongGame.AddEntity(entity.NewBall(
 			rand.Intn(common.SCREEN_WIDTH), rand.Intn(common.SCREEN_HEIGHT),
-			math.GetRandomDirection()*common.BALL_SPEED, math.GetRandomDirection()*common.BALL_SPEED,
+			geometry.GetRandomDirection()*common.BALL_SPEED, geometry.GetRandomDirection()*common.BALL_SPEED,
 			10, 10,
 		))
 	}

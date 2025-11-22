@@ -1,4 +1,4 @@
-package math
+package geometry
 
 import (
 	"math/rand"
@@ -55,11 +55,11 @@ func (p *Position) MoveUp(_y int) {
 	p.y -= _y
 }
 
-func (p *Position) setX(_x int) {
+func (p *Position) SetX(_x int) {
 	p.x = _x
 }
 
-func (p *Position) setY(_y int) {
+func (p *Position) SetY(_y int) {
 	p.y = _y
 }
 
